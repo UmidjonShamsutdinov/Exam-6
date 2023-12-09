@@ -1,0 +1,13 @@
+.single-category{
+    >img{
+        width: 100%;
+        height: 60vh;
+    }
+}
+
+.single-category-cards{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    object-fit: contain;
+}
