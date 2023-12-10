@@ -16,7 +16,6 @@ const Utils = () => {
 
 export const Card = ({product}) => {
   const [errorPlaceholder,setErrorPlaceholder] = useState(false)
-
   const handleStopPropogate = (e) => {
     e.stopPropagation()
   }
@@ -25,17 +24,19 @@ export const Card = ({product}) => {
   return(
     <div key={product.id} className='card'>
       <Link to={`/single-product/${product.id}`}>
-        <div className='icons' onClick={handleStopPropogate}>
-          <CiHeart/>
-          <BsCart3/>
+        <div className='icons'>
+          <CiHeart onClick={handleStopPropogate}/>
+          <BsCart3 onClick={handleStopPropogate}/>
         </div>
-        <img onError={(i, s) => {
-            if(!s){
-              setErrorPlaceholder(true)
-            }
-          }} src={!product.image_link  || errorPlaceholder ? "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" : product.image_link } alt="" />
+        <div className="img">
+          <img onError={(i, s) => {
+              if(!s){
+                setErrorPlaceholder(true)
+              }
+            }} src={!product.image_link  || errorPlaceholder ? "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png" : product.image_link } alt="" />
+        </div>
         <div className="product-info">
-          <h3 onClick={(e)=>e.stopPropagation()}>{parse(product.name)}</h3>
+          <h3>{parse(product.name)}</h3>
           <p title={product.description}>{parse(product.description.length > 150 ? product.description.slice(0, 150) + "..." : product.description)}</p>
         </div>
       </Link>
