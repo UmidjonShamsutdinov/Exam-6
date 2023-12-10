@@ -35,9 +35,9 @@ const SingleProduct = (props) => {
             <div className="product-color">
               <p>Choose a Color</p>
               <div className="colors">
-                {product?.product_colors.map(e=>
+                {/* {product?.product_colors.map(e=>
                   <div className='color' style={{backgroundColor:e.hex_value}}></div>
-                  )}
+                  )} */}
               </div>
             </div>
             <div className="buttons">

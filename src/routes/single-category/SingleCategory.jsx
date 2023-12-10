@@ -16,9 +16,10 @@ import bb_ccImg from "../../assets/single-cat-bb_cc.jpg"
 import contourImg from "../../assets/single-cat-contour.jpg"
 import lip_stainImg from "../../assets/single-cat-lip_stain.jpg"
 import mineralImg from "../../assets/single-cat-mineral.png"
-import { Card, Container } from '../../utils/Utils'
+import { Container } from '../../utils/Utils'
 import Nav from '../../layout/nav/Nav'
 import "./SingleCategory.scss"
+import Card from '../../components/card/Card'
 
 
 
@@ -26,14 +27,23 @@ const SingleCategory = (props) => {
     const data = useSelector(state => state.single_category_data.category)
     const images = [mineralImg,pencilImg,powderImg,lipstickImg,liquidImg,lip_glossImg,gelImg,creamImg,paletteImg,concealerImg,highlighterImg,bb_ccImg,contourImg,lip_stainImg]
     const {categoryName} = useParams()
-    useEffect(()=>{
-       props.byCategoryThunk(categoryName)
-    },[])
+    console.log(categoryName);
     
+    useEffect(()=>{
+      if(localStorage.getItem("type")){
+        let type = localStorage.getItem("type")
+        props.byCategoryThunk(categoryName, type)
+      }else{
+        props.byCategoryThunk(categoryName)
+      }
+      
+    },[])
+
+
   return (
     <div className='single-category'>
         <Nav/>
-        <img src={images.filter(e=>e.includes(categoryName))} alt="img" />
+        <img src={images.filter(e=>e.includes(categoryName.split("&")[0]))} alt="img" />
         <Container>
           <div className='single-category-cards'>
             {

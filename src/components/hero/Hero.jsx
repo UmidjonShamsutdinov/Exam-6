@@ -21,16 +21,19 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-
+import db from "../../data/db.json"
 
 
 // import required modules
 import { Autoplay} from 'swiper/modules';
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Hero = () => {
-
-
+    const {singletype} = useSelector(state => state.single_type_data)
+    const {type} = useParams()
+    type != undefined ? localStorage.setItem("type", type) : localStorage.removeItem("type")
+    let types = Object.keys(db)
     let arr = [
         {
             name: "pencil",
@@ -89,6 +92,17 @@ const Hero = () => {
             image: mineralImg
         },
     ]
+    let indexes = []
+    
+    if(type != undefined){
+        for(let i = 0; i<arr.length; i++){
+            for(let j = 0; j<types.length; j++){
+                if(arr[i].name === db[type]?.category[j]){
+                    indexes.push(arr[i])
+                }
+            }
+        }
+    }
 
   return (
     <div className='hero'>
@@ -103,7 +117,18 @@ const Hero = () => {
             className="mySwiper"
             >
             {
-                arr.map((e,i)=>
+                type != undefined ? indexes.map((e,i)=>
+                    <div key={i}>
+                        <SwiperSlide className='hero__swiper-slide'>
+                            <div className='hero__swiper-div'>
+                                <img className='hero-banner' src={e.image} alt="" />
+                                <Link to={`/single-category/${e.name}&${type}`}>View more information about {e.name}</Link>
+                            </div>
+                        </SwiperSlide>
+                    </div>
+                    )
+                    :
+                    arr.map((e,i)=>
                     <div key={i}>
                         <SwiperSlide className='hero__swiper-slide'>
                             <div className='hero__swiper-div'>

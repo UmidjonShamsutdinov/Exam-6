@@ -1,0 +1,3 @@
+# Single Product  : https://makeup-api.herokuapp.com/api/v1/products/ID.json
+# Single Category : https://makeup-api.herokuapp.com/api/v1/products.json?product_category=powder
+# All products    : https://makeup-api.herokuapp.com/api/v1/products.json

@@ -11,7 +11,7 @@
     >p{
         color: #FAF7F2;
         text-align: center;
-        font-family: Inter;
+        font-family: var(--main-font-f);
         font-size: 15.316px;
         font-style: normal;
         font-weight: 600;
@@ -19,6 +19,43 @@
         letter-spacing: 1px;
     }
 }
+
+.nav__links{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px 0 20px 0;
+    justify-content: space-around;
+    .nav__link{
+        text-decoration: none;
+        color: #1D364D;
+        font-family: var(--main-font-f);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        color: #57464f;
+        &--active{
+            color: #E6007E;
+            position: relative;
+            &::after{
+                position: absolute;
+                content: "";
+                width: 5px;
+                height: 5px;
+                background-color: #57464f;
+                bottom: -10px;
+                left: 50%;
+                border-radius: 50%;
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+}
+
+
+
+
 .nav__bottom{
     display: flex;
     justify-content: space-between;
